@@ -9,11 +9,15 @@ header{
     }
     nav{
         width: 35%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         ul{
             width: 100%;
             display:flex;
             justify-content: space-around;
             align-items: center;
+            padding-left: 0;
             li a{
                 background-image: linear-gradient(
                     to right,
@@ -49,5 +53,35 @@ header{
                 }
             }
         }
+        .search{
+            display: flex;
+            align-content: flex-end;
+            width: fit-content;
+            .searchTextbox{
+                height: 30px;
+                width: 250px;
+                border-radius: 30px;
+                background-color:transparent;
+                text-align: center;
+                border: 2px black solid;
+            }
+            .searchIcon{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                border: none;
+                position: relative;
+                left: 30px;
+                background-color:transparent;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                img{
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
     }
 }
+

@@ -3,8 +3,52 @@
   list-style: none;
 }
 
+html{
+  font-size: 62.5%;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-weight: initial;
+  line-height: normal;
+}
+
 a{
   color: black;
+  text-decoration: none;
+}
+
+a:hover{
+  color: initial;
+}
+
+h1{
+  font-size: 4.2rem;
+}
+h2{
+  font-size: 3rem;
+}
+h3{
+  font-size: 2.3rem;
+}
+h4, label{
+  font-size: 2rem;
+}
+h5{
+  font-size: 1.7rem;
+}
+p, a, button, input, text{
+  font-size: 1.5rem !important;
+}
+
+.font2{
+  font-family: 'Lato', sans-serif;
+}
+.font3{
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: 500;
+}
+.font4{
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
