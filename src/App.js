@@ -6,11 +6,11 @@ function App() {
   return (
     <div>
      <Navbar/>
-     <ItemListContainer category='Women'/>
-     <ItemListContainer category='Men'/>
-     <ItemListContainer category='Kids'/>
-     <ItemListContainer category='Accesories'/>
-     <ItemListContainer category='Sale'/>
+     <ItemListContainer category='women'/>
+     <ItemListContainer category='men'/>
+     <ItemListContainer category='kids'/>
+     <ItemListContainer category='accesories'/>
+     <ItemListContainer category='sale'/>
     </div>
   );
 }

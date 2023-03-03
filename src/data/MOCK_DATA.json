@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Gilbert T-shirt - Rosin",
+        "category": "men",
+        "section": "shirt",
+        "color": "green",
+        "disponibility": {
+            "size": [
+                false,
+                true,
+                true,
+                true,
+                false
+            ],
+            "stock": [
+                null,
+                "10",
+                "7",
+                "15",
+                null
+            ]
+        },
+        "images": {
+            "main": "camiseta-gilbert-manga-corta-rosin.webp",
+            "secondary": [
+                "camiseta-gilbert-manga-corta-rosin-secondary.webp"
+            ]
+        },
+        "price": "20.56",
+        "sale": true,
+        "discount": 25,
+        "disponible": true,
+        "id": 1
+    }
+]
