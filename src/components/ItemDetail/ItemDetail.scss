@@ -1,0 +1,47 @@
+.detailContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    .datailImages{
+        width: 50%;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        img{
+            width: auto;
+            height: calc(100vh - 149px);
+        }
+        .detailImagesColumn{
+            width: 10%;
+            height: auto;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            img{
+                width: 100%;
+                height: auto;
+                border: black solid 1px;
+            }
+        }
+    }
+    .detailInfo{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        .detailSize{
+            display: flex;
+        }
+        .detailPrice{
+            display: flex;
+            .canceledPrice{
+                background-color: darkgrey;
+            }
+            .discount{
+                background-color: red;
+            }
+        }
+        .detailQuantity{
+            display: flex;
+        }
+    }
+}

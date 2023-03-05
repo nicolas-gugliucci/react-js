@@ -1,10 +1,11 @@
 [
     {
-        "name": "Gilbert T-shirt - Rosin",
+        "name": "Gilbert T-shirt",
         "category": "men",
         "section": "shirt",
-        "color": "green",
-        "disponibility": {
+        "color": "rosin",
+        "description": "Striped print T-shirt. Circular knitting. Composition: 100% Cotton.",
+        "availability": {
             "size": [
                 false,
                 true,
@@ -14,9 +15,9 @@
             ],
             "stock": [
                 null,
-                "10",
-                "7",
-                "15",
+                10,
+                7,
+                15,
                 null
             ]
         },
@@ -26,10 +27,10 @@
                 "camiseta-gilbert-manga-corta-rosin-secondary.webp"
             ]
         },
-        "price": "20.56",
+        "price": 20.56,
         "sale": true,
         "discount": 25,
-        "disponible": true,
+        "available": true,
         "id": 1
     }
 ]
