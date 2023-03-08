@@ -6,7 +6,7 @@
         width: 50%;
         height: auto;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         img{
             width: auto;
             height: calc(100vh - 149px);
@@ -29,15 +29,56 @@
         display: flex;
         flex-direction: column;
         .detailSize{
+            width: 30%;
             display: flex;
+            justify-content: space-around;
+            div{
+                width: 27px;
+                height: 27px;
+            }
+            input{
+                width: 27px;
+                height: 27px;
+                margin: 0 !important;
+                visibility: hidden;
+            }
+            label{
+                display: block;
+                width: 27px;
+                height: 27px;
+                position: relative;
+                bottom: 27px;
+                z-index: 2;
+                text-align: center;
+                border: solid rgb(0, 0, 0) 1px;
+            }
+            .hovered{
+                &:hover{
+                    filter: brightness(85%)
+                }
+            }
         }
         .detailPrice{
+            width: 35%;
             display: flex;
-            .canceledPrice{
-                background-color: darkgrey;
+            justify-content: space-around;
+            align-items: baseline;
+            .prices{
+                display: flex;
+                align-items: baseline;
+                .price{
+                    font-size: 2rem !important;
+                }
+                .canceledPrice{
+                    text-decoration: line-through;
+                    font-size: 1.2rem !important;
+                    height: fit-content;
+                    margin-left: 5px;
+                }
             }
             .discount{
                 background-color: red;
+                height: fit-content;
             }
         }
         .detailQuantity{

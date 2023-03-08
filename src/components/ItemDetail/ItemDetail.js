@@ -10,7 +10,11 @@ export function ItemDetail({item}) {
   const subtract = () => {
     (quantity > 1) && setQuantity(quantity -1)
   }
-  
+  const hovered = (i) => (item.availability.stock[i]?"hovered":"")
+
+  const notSizeStile = (i) => (!item.availability.size[i]?{display: "none"}:{})
+
+  const notAvailabilityStyle = (i) => (!item.availability.stock[i]?{color: "gray", backgroundColor: "rgb(216, 136, 136)"}:{backgroundColor: "rgb(133, 212, 133)"})
 
     return (
           item ?
@@ -25,7 +29,6 @@ export function ItemDetail({item}) {
               <div className="detailInfo">
                 <h3>{capitalize(item.name)+" - "+capitalize(item.color)}</h3>
                 <div>
-                  <h4>Description</h4>
                   <p>{item.description}</p>
                 </div>
                 <div>
@@ -34,25 +37,25 @@ export function ItemDetail({item}) {
                 <div>
                   <h4>Size</h4>
                   <form className="detailSize">
-                    <div>
+                    <div style={notSizeStile(0)}>
                       <input type="radio" id="xs" name="size" disabled={!item.availability.size[0]}/>
-                      <label htmlFor="xs">XS</label>
+                      <label htmlFor="xs" className={hovered(0)} style={notAvailabilityStyle(0)} >XS</label>
                     </div>
-                    <div>
+                    <div style={notSizeStile(1)}>
                       <input type="radio" id="s" name="size" disabled={!item.availability.size[1]}/>
-                      <label htmlFor="s">S</label>
+                      <label htmlFor="s" className={hovered(1)} style={notAvailabilityStyle(1)}>S</label>
                     </div>
-                    <div>
+                    <div style={notSizeStile(2)}>
                       <input type="radio" id="m" name="size" disabled={!item.availability.size[2]}/>
-                      <label htmlFor="m">M</label>
+                      <label htmlFor="m" className={hovered(2)} style={notAvailabilityStyle(2)}>M</label>
                     </div>
-                    <div>
+                    <div style={notSizeStile(3)}>
                       <input type="radio" id="l" name="size" disabled={!item.availability.size[3]}/>
-                      <label htmlFor="l">L</label>
+                      <label htmlFor="l" className={hovered(3)} style={notAvailabilityStyle(3)}>L</label>
                     </div>
-                    <div>
+                    <div style={notSizeStile(4)}>
                       <input type="radio" id="xl" name="size" disabled={!item.availability.size[4]}/>
-                      <label htmlFor="xl">XL</label>
+                      <label htmlFor="xl" className={hovered(4)} style={notAvailabilityStyle(4)}>XL</label>
                     </div>
                   </form>
                 </div>
@@ -63,12 +66,14 @@ export function ItemDetail({item}) {
                   <h5>Price</h5>
                   {item.sale ? 
                     <div className="detailPrice">
-                      <p>U$S {(item.price - item.discount*item.price/100).toFixed(2)}</p>
-                      <p className="canceledPrice">U$S {item.price}</p>
+                      <div className="prices">
+                        <p className="price">U$S {(item.price - item.discount*item.price/100).toFixed(2)}</p>
+                        <p className="canceledPrice">U$S {item.price}</p>
+                      </div>
                       <p className="discount">-{item.discount}%</p>
                     </div>
                     :
-                    <p>U$S {item.price}</p>
+                    <p className="price">U$S {item.price}</p>
                     }
                 </div>
                 <div className="detailQuantity">
