@@ -1,90 +1,120 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { capitalize } from "../../helpers/capitalize";
+import Button from 'react-bootstrap/button';
 import './ItemDetail.scss'
+import { Link } from "react-router-dom";
 
-export function ItemDetail({item}) {
-  let [quantity, setQuantity]= useState(1)
+export function ItemDetail({item, itemsColorVariety}) {
+  const [quantity, setQuantity]= useState(1)
+  const [radioValue, setRadioValue] = useState('0')
+  const [img, setImg] = useState('')
+  const sizes = [
+    { name: 'XS', value: '0' },
+    { name: 'S', value: '1' },
+    { name: 'M', value: '2' },
+    { name: 'L', value: '3' },
+    { name: 'XL', value: '4' },
+  ];
+
+  useEffect(()=>{
+    item&&
+      setImg(item.images.main)
+  },[item])
+
+  useEffect(()=>{
+    item&&
+      quantity>item.availability.stock[radioValue]&&setQuantity(item.availability.stock[radioValue])
+  },[radioValue])
+  
+  const notSizeStyle = (i) => (!item.availability.size[i]?"notAvailable":{})
+  const sizeStyle = (i) => {
+    if (item.availability.size[i] && item.availability.stock[i]) {
+      if (radioValue === i){
+        return "available checked"
+      }else{
+        return "available"
+      }
+    }else{
+      return "disabled"
+    }
+  }
+
   const add = () => {
-    (item.availability.stock[0] > quantity) && setQuantity(quantity +1)//conectar tope con stock!
+    (item.availability.stock[radioValue] > quantity) && setQuantity(quantity +1)
   }
   const subtract = () => {
     (quantity > 1) && setQuantity(quantity -1)
   }
-  const hovered = (i) => (item.availability.stock[i]?"hovered":"")
 
-  const notSizeStile = (i) => (!item.availability.size[i]?{display: "none"}:{})
-
-  const notAvailabilityStyle = (i) => (!item.availability.stock[i]?{color: "gray", backgroundColor: "rgb(216, 136, 136)"}:{backgroundColor: "rgb(133, 212, 133)"})
-
-    return (
-          item ?
-            <div className="detailContainer">
-              <div className="datailImages">
-                <div className="detailImagesColumn">
-                  <img src={"../images/"+item.images.main} alt={item.name}/>
-                  {item.images.secondary.map((image) => <img key={image} src={"../images/"+image} alt={item.name}/>)}
-                </div>
-                <img src={"../images/"+item.images.main} alt={item.name}/>
+  return (
+        item ?
+          <div className="detailContainer">
+            <div className="datailImages">
+              <div className="detailImagesColumn">
+                <img id={item.images.main}  onClick={(e) => setImg(e.currentTarget.id)} src={`../../images/${item.images.main}`} alt={item.name}/>
+                {item.images.secondary.map((image) => <img key={image} id={image} onClick={(e) => setImg(e.currentTarget.id)} src={"../../images/"+image} alt={item.name}/>)}
               </div>
-              <div className="detailInfo">
-                <h3>{capitalize(item.name)+" - "+capitalize(item.color)}</h3>
+              <img src={`../../images/${img}`} alt={item.name}/>
+            </div>
+            <div className="detailInfo">
+              <h3>{capitalize(item.name)+" - "+capitalize(item.color)}</h3>
+              <div>
+                <p>{item.description}</p>
+              </div>
+              {itemsColorVariety &&
                 <div>
-                  <p>{item.description}</p>
+                  <h4>Color</h4>
+                  <div className="detailColor">
+                    <img className="currentColor" src={"../../images/"+item.images.main} alt={item.color}/>
+                    {itemsColorVariety.map((item) => {
+                      return(
+                        <Link to={`/${item.category}/item/${item.id}`} key={item.images.main} className="otherColor"><img src={"../../images/"+item.images.main} alt={item.color}/></Link>
+                      )
+                    })}
+                  </div>
                 </div>
-                <div>
-                  {/*Agregar variedad de color */}
+              }
+              <div>
+                <h4>Size</h4>
+                <form className="detailSize">
+                  {sizes.map((radio, idx) => (
+                    <div key={idx} className={notSizeStyle(radio.value)}>
+                      <input type="radio" id={radio.name} value={radio.value} name="size" onChange={(e) => setRadioValue(e.currentTarget.value)} disabled={item.availability.stock[radio.value]===0}/>
+                      <label htmlFor={radio.name} className={sizeStyle(radio.value)}>{radio.name}</label>
+                    </div>
+                  ))}
+                </form>
+                <div className="detailStock">
+                  {item.availability.stock[radioValue]!=null&&
+                    <p>{`Stock: ${item.availability.stock[radioValue]}`}</p>
+                  }
                 </div>
-                <div>
-                  <h4>Size</h4>
-                  <form className="detailSize">
-                    <div style={notSizeStile(0)}>
-                      <input type="radio" id="xs" name="size" disabled={!item.availability.size[0]}/>
-                      <label htmlFor="xs" className={hovered(0)} style={notAvailabilityStyle(0)} >XS</label>
+              </div>
+              <div>
+                <h4>Price</h4>
+                {item.sale ? 
+                  <div className="detailPrice">
+                    <div className="prices">
+                      <p className="price">U$S {(item.price - item.discount*item.price/100).toFixed(2)}</p>
+                      <p className="canceledPrice">U$S {item.price}</p>
                     </div>
-                    <div style={notSizeStile(1)}>
-                      <input type="radio" id="s" name="size" disabled={!item.availability.size[1]}/>
-                      <label htmlFor="s" className={hovered(1)} style={notAvailabilityStyle(1)}>S</label>
-                    </div>
-                    <div style={notSizeStile(2)}>
-                      <input type="radio" id="m" name="size" disabled={!item.availability.size[2]}/>
-                      <label htmlFor="m" className={hovered(2)} style={notAvailabilityStyle(2)}>M</label>
-                    </div>
-                    <div style={notSizeStile(3)}>
-                      <input type="radio" id="l" name="size" disabled={!item.availability.size[3]}/>
-                      <label htmlFor="l" className={hovered(3)} style={notAvailabilityStyle(3)}>L</label>
-                    </div>
-                    <div style={notSizeStile(4)}>
-                      <input type="radio" id="xl" name="size" disabled={!item.availability.size[4]}/>
-                      <label htmlFor="xl" className={hovered(4)} style={notAvailabilityStyle(4)}>XL</label>
-                    </div>
-                  </form>
-                </div>
-                <div>
-                  {/*Agregar stock segun seleccion */}
-                </div>
-                <div>
-                  <h5>Price</h5>
-                  {item.sale ? 
-                    <div className="detailPrice">
-                      <div className="prices">
-                        <p className="price">U$S {(item.price - item.discount*item.price/100).toFixed(2)}</p>
-                        <p className="canceledPrice">U$S {item.price}</p>
-                      </div>
-                      <p className="discount">-{item.discount}%</p>
-                    </div>
-                    :
-                    <p className="price">U$S {item.price}</p>
-                    }
-                </div>
+                    <p className="discount">-{item.discount}%</p>
+                  </div>
+                  :
+                  <p className="price">U$S {item.price}</p>
+                  }
+              </div>
+              <div className="detailBuy">
+                <Button variant="success">Buy U$S{item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</Button>
                 <div className="detailQuantity">
-                  <button onClick={subtract}>-</button>
-                  <div>{quantity}</div>
-                  <button onClick={add}>+</button>
+                  <Button variant="outline-danger"  onClick={subtract}>-</Button>
+                  <div className="quantity">{quantity}</div>
+                  <Button variant="outline-success" onClick={add}>+</Button>
                 </div>
-                <button>Buy</button>{/*Agregar precio segun quantity! */}
               </div>
             </div>
-            :
-            <div></div>
-    )
+          </div>
+        :
+          <div></div>
+  )
 }

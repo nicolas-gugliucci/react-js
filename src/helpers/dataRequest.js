@@ -5,6 +5,6 @@ export function dataRequest () {
         setTimeout(() => {
             // const productsByCategory = MOCK_DATA.filter((item) => item.category === category)
             resolve(MOCK_DATA)
-        }, 2000)
+        }, 1500)
     })
 }

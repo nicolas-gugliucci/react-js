@@ -7,6 +7,7 @@
         height: auto;
         display: flex;
         justify-content: space-around;
+        height: calc(100vh - 149px);
         img{
             width: auto;
             height: calc(100vh - 149px);
@@ -20,21 +21,53 @@
             img{
                 width: 100%;
                 height: auto;
+                margin: 2px 0;
                 border: black solid 1px;
             }
         }
     }
     .detailInfo{
         width: 40%;
+        height: calc(100vh - 149px);
         display: flex;
         flex-direction: column;
+        justify-content: space-evenly;
+        .detailColor{
+            display: flex;
+            .currentColor{
+                border: solid rgb(0, 0, 0) 1px;
+                overflow: hidden;
+                height: 50px;
+                margin: 0 5px;
+                width: auto;
+                height: 50px;
+            }
+            .otherColor{
+                cursor: pointer;
+                &:hover{
+                    border: solid rgb(0, 0, 0) 1px;
+                    overflow: hidden;
+                }
+            }
+            a{
+                height: 50px;
+                margin: 0 5px;
+                img{
+                    width: auto;
+                    height: 50px;
+                }
+            }
+        }
         .detailSize{
             width: 30%;
             display: flex;
-            justify-content: space-around;
+            .notAvailable{
+                display: none;
+            }
             div{
                 width: 27px;
                 height: 27px;
+                margin: 0 5px;
             }
             input{
                 width: 27px;
@@ -43,25 +76,33 @@
                 visibility: hidden;
             }
             label{
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 width: 27px;
                 height: 27px;
                 position: relative;
-                bottom: 27px;
-                z-index: 2;
+                bottom: 30px;
                 text-align: center;
-                border: solid rgb(0, 0, 0) 1px;
             }
-            .hovered{
+            .available{
+                background-color: rgb(133, 212, 133);
+                cursor: pointer;
                 &:hover{
-                    filter: brightness(85%)
+                    filter: brightness(85%);
                 }
+            }
+            .disabled{
+                color: rgb(88, 88, 88);
+                background-color: rgb(216, 136, 136);
+            }
+            .checked{
+                filter: brightness(85%);
+                border: solid rgb(0, 0, 0) 1px;
             }
         }
         .detailPrice{
-            width: 35%;
             display: flex;
-            justify-content: space-around;
             align-items: baseline;
             .prices{
                 display: flex;
@@ -70,7 +111,7 @@
                     font-size: 2rem !important;
                 }
                 .canceledPrice{
-                    text-decoration: line-through;
+                    text-decoration: line-through !important;
                     font-size: 1.2rem !important;
                     height: fit-content;
                     margin-left: 5px;
@@ -78,11 +119,34 @@
             }
             .discount{
                 background-color: red;
+                font-size: 2rem !important;
                 height: fit-content;
+                margin-left: 15px;
             }
+        }
+        .detailBuy{
+            width: 50%;
+            display: flex;
+            justify-content: space-between;
+            
         }
         .detailQuantity{
             display: flex;
+            button{
+                width: 25px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: baseline;
+                padding: 0;
+            }
+            .quantity{
+                width: 25px;
+                height: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }

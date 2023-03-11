@@ -4,6 +4,7 @@ import searchLogo from './searchLogo.png'
 import './Navbar.scss'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 
 
 export function Navbar() {
@@ -13,11 +14,11 @@ export function Navbar() {
         <img src={logo} className='logo'/>
         <nav>
             <ul>
-                <li><a href="#" className='font4'>Women</a></li>
-                <li><a href="#" className='font4'>Men</a></li>
-                <li><a href="#" className='font4'>Kids</a></li>
-                <li><a href="#" className='font4'>Accesories</a></li>
-                <li><a href="#" className='font4'>Sale</a></li>
+                <li><Link to="/women" className='font4'>Women</Link></li>
+                <li><Link to="/men" className='font4'>Men</Link></li>
+                <li><Link to="/kids" className='font4'>Kids</Link></li>
+                <li><Link to="/accesories" className='font4'>Accesories</Link></li>
+                <li><Link to="/sale" className='font4'>Sale</Link></li>
             </ul>
             <Form className='search'>
               <Button className='searchIcon' type="submit">

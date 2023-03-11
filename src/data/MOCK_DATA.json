@@ -32,5 +32,39 @@
         "discount": 25,
         "available": true,
         "id": 1
+    },
+    {
+        "name": "Gilbert T-shirt",
+        "category": "men",
+        "section": "shirt",
+        "color": "Cream",
+        "description": "Striped print T-shirt. Circular knitting. Composition: 100% Cotton.",
+        "availability": {
+            "size": [
+                false,
+                true,
+                true,
+                true,
+                false
+            ],
+            "stock": [
+                null,
+                10,
+                0,
+                15,
+                null
+            ]
+        },
+        "images": {
+            "main": "camiseta-gilbert-manga-corta-silver-lining.jpg",
+            "secondary": [
+                "camiseta-gilbert-manga-corta-silver-lining-secondary.jpg"
+            ]
+        },
+        "price": 20.56,
+        "sale": true,
+        "discount": 25,
+        "available": true,
+        "id": 2
     }
 ]
