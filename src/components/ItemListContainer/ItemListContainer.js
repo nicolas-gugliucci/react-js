@@ -18,7 +18,13 @@ export function ItemListContainer() {
     dataRequest()
       .then((response) => {
         if(category){
-          setProducts(response.filter((item) => item.category === category))
+          if(category === "sale"){
+            setProducts(response.filter((item) => item.sale))
+          }else if(category === "accesories"){
+            setProducts(response.filter((item) => item.section === category))
+          }else{
+            setProducts(response.filter((item) => item.category === category))
+          }
         }else{
           setProducts(response)
         }
@@ -42,8 +48,8 @@ export function ItemListContainer() {
         }
         <div className='itemListContainer'>
           <h2 className='font4'>{category?capitalize(category):"Home"}</h2>
-          <ItemList items={productos}/>
           <hr/>
+          <ItemList items={productos}/>
         </div>
       </div>
   );

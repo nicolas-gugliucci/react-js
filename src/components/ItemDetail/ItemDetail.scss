@@ -3,21 +3,25 @@
     display: flex;
     justify-content: space-around;
     .datailImages{
+        margin-top: 10px;
         width: 50%;
         height: auto;
         display: flex;
         justify-content: space-around;
-        height: calc(100vh - 175px);
+        height: calc(100vh - 210px);
         img{
             width: auto;
-            height: calc(100vh - 175px);
+            height: calc(100vh - 210px);
         }
         .detailImagesColumn{
             width: 10%;
-            height: auto;
-            margin-top: 50px;
+            height: calc(100vh - 210px);
             display: flex;
             flex-direction: column;
+            overflow-y: scroll;
+            &::-webkit-scrollbar{
+                display: none;
+            }
             img{
                 width: 100%;
                 height: auto;
@@ -28,10 +32,10 @@
     }
     .detailInfo{
         width: 40%;
-        height: calc(100vh - 175px);
+        height: calc(100vh - 210px);
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-around;
         .detailColor{
             display: flex;
             .currentColor{

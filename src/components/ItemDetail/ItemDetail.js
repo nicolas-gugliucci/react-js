@@ -9,6 +9,8 @@ export function ItemDetail({item, itemsColorVariety}) {
   const [quantity, setQuantity]= useState(1)
   const [radioValue, setRadioValue] = useState('0')
   const [img, setImg] = useState('')
+  const [size, setSize] = useState(true)
+  
   const sizes = [
     { name: 'XS', value: '0' },
     { name: 'S', value: '1' },
@@ -20,6 +22,7 @@ export function ItemDetail({item, itemsColorVariety}) {
   useEffect(()=>{
     item&&
       setImg(item.images.main)
+      setSize(item.availability.size.filter((size) => size === true).length !== 0)
   },[item])
 
   useEffect(()=>{
@@ -54,10 +57,12 @@ export function ItemDetail({item, itemsColorVariety}) {
             <GoBack/>
             <div className="detailContainer">
               <div className="datailImages">
-                <div className="detailImagesColumn">
-                  <img id={item.images.main}  onClick={(e) => setImg(e.currentTarget.id)} src={`../../images/${item.images.main}`} alt={item.name}/>
-                  {item.images.secondary.map((image) => <img key={image} id={image} onClick={(e) => setImg(e.currentTarget.id)} src={`../../images/${image}`} alt={item.name}/>)}
-                </div>
+                {item.images.secondary.length!==0&&
+                  <div className="detailImagesColumn">
+                    <img id={item.images.main}  onClick={(e) => setImg(e.currentTarget.id)} src={`../../images/${item.images.main}`} alt={item.name}/>
+                    {item.images.secondary.map((image) => <img key={image} id={image} onClick={(e) => setImg(e.currentTarget.id)} src={`../../images/${image}`} alt={item.name}/>)}
+                  </div>
+                }
                 <img src={`../../images/${img}`} alt={item.name}/>
               </div>
               <div className="detailInfo">
@@ -79,7 +84,11 @@ export function ItemDetail({item, itemsColorVariety}) {
                   </div>
                 }
                 <div>
-                  <h4>Size</h4>
+                  {size?
+                    <h4>Size</h4>
+                  :
+                    <div></div>
+                  }
                   <form className="detailSize">
                     {sizes.map((radio, idx) => (
                       <div key={idx} className={notSizeStyle(radio.value)}>
