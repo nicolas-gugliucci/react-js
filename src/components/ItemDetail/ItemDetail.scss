@@ -7,10 +7,10 @@
         height: auto;
         display: flex;
         justify-content: space-around;
-        height: calc(100vh - 149px);
+        height: calc(100vh - 175px);
         img{
             width: auto;
-            height: calc(100vh - 149px);
+            height: calc(100vh - 175px);
         }
         .detailImagesColumn{
             width: 10%;
@@ -28,7 +28,7 @@
     }
     .detailInfo{
         width: 40%;
-        height: calc(100vh - 149px);
+        height: calc(100vh - 175px);
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

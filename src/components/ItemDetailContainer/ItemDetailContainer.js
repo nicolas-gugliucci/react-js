@@ -3,13 +3,16 @@ import { ItemDetail } from "../ItemDetail/ItemDetail"
 import { detailRequest } from '../../helpers/detailRequest';
 import { colorVarietyRequest } from '../../helpers/colorVarietyRequest';
 import { useParams } from "react-router-dom";
+import { Loading } from "../Loading/Loading";
 
 
 export function ItemDetailContainer() {
   const {id} = useParams()
   const [item, setItem] = useState(null)
   const [colorVariety, setColorVariety] = useState(null)
+  const [loading, setLoading] = useState(true)
     useEffect(() => {
+      setLoading(true)
       detailRequest(id)
         .then((response) => {
             setItem(response)
@@ -18,9 +21,13 @@ export function ItemDetailContainer() {
           console.log(error)
           alert('Oops something went wrong :( \nPlease try again in a while')
         })
+        .finally(()=>{
+          setLoading(false)
+        })
     },[id])
     useEffect(() => {
-      item&&
+      if(item){
+        setLoading(true)
         colorVarietyRequest(item)
           .then((response) => {
             setColorVariety(response)
@@ -29,10 +36,18 @@ export function ItemDetailContainer() {
             console.log(error)
             alert('Oops something went wrong :( \nPlease try again in a while')
           })
-    },[item,id])
+          .finally(()=>{
+            setLoading(false)
+          })
+      }
+    },[item])
     return (
         <div className='itemDetailContainer'>
-            <ItemDetail item={item} itemsColorVariety={colorVariety}/>
+            {loading?
+              <Loading/>
+            :
+              <ItemDetail item={item} itemsColorVariety={colorVariety}/>
+            }
         </div>
       );
   }

@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 export function Navbar() {
     return (
       <header>
-        <h1 className='font3'>Klash & Mor</h1>
-        <img src={logo} className='logo'/>
+        <Link to="/"><h1 className='font3'>Klash & Mor</h1></Link>
+        <Link to="/"><img src={logo} alt="Klash & Mor logo" className='logo'/></Link>
         <nav>
             <ul>
                 <li><Link to="/women" className='font4'>Women</Link></li>
@@ -22,7 +22,7 @@ export function Navbar() {
             </ul>
             <Form className='search'>
               <Button className='searchIcon' type="submit">
-                <img src={searchLogo}/>
+                <img src={searchLogo} alt="Search logo"/>
               </Button>
               <Form.Control className='searchTextbox font4' type="search" placeholder="Type to Search..." />
             </Form>

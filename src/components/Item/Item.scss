@@ -19,10 +19,30 @@
         align-items: center;
         h5{
             text-align: center;
-            margin: 0;
+            margin: 0 3px;
         }
-        p{
-            margin: 0 0 10px 0;
+        .detailPrice{
+            display: flex;
+            align-items: baseline;
+            .prices{
+                display: flex;
+                align-items: baseline;
+                .price{
+                    font-size: 1.2rem !important;
+                }
+                .canceledPrice{
+                    text-decoration: line-through !important;
+                    font-size: 0.8rem !important;
+                    height: fit-content;
+                    margin-left: 5px;
+                }
+            }
+            .discount{
+                background-color: red;
+                font-size: 1.2rem !important;
+                height: fit-content;
+                margin-left: 15px;
+            }
         }
     }
 }
