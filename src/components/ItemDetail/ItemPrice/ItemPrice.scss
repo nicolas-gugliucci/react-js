@@ -1,0 +1,23 @@
+.detailPrice{
+    display: flex;
+    align-items: baseline;
+    .prices{
+        display: flex;
+        align-items: baseline;
+        .price{
+            font-size: 2rem !important;
+        }
+        .canceledPrice{
+            text-decoration: line-through !important;
+            font-size: 1.2rem !important;
+            height: fit-content;
+            margin-left: 5px;
+        }
+    }
+    .discount{
+        background-color: red;
+        font-size: 2rem !important;
+        height: fit-content;
+        margin-left: 15px;
+    }
+}

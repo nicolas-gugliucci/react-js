@@ -2,130 +2,48 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    .datailImages{
-        margin-top: 10px;
-        width: 50%;
-        height: auto;
-        display: flex;
-        justify-content: space-around;
-        height: calc(100vh - 210px);
-        img{
-            width: auto;
-            height: calc(100vh - 210px);
-        }
-        .detailImagesColumn{
-            width: 10%;
-            height: calc(100vh - 210px);
-            display: flex;
-            flex-direction: column;
-            overflow-y: scroll;
-            &::-webkit-scrollbar{
-                display: none;
-            }
-            img{
-                width: 100%;
-                height: auto;
-                margin: 2px 0;
-                border: black solid 1px;
-            }
-        }
-    }
     .detailInfo{
         width: 40%;
         height: calc(100vh - 210px);
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        .detailColor{
+        .detailEdit{
+            width: 50%;
             display: flex;
-            .currentColor{
-                border: solid rgb(0, 0, 0) 1px;
-                overflow: hidden;
-                height: 50px;
-                margin: 0 5px;
-                width: auto;
-                height: 50px;
+            align-items: center;
+            p{
+                height: 30px;
+                margin: 0;
+                padding: 2px;
+                border: 1px solid #007bff;
+                color: #007bff;
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right: none;
             }
-            .otherColor{
-                cursor: pointer;
-                &:hover{
-                    border: solid rgb(0, 0, 0) 1px;
-                    overflow: hidden;
-                }
-            }
-            a{
-                height: 50px;
-                margin: 0 5px;
-                img{
-                    width: auto;
-                    height: 50px;
-                }
-            }
-        }
-        .detailSize{
-            width: 30%;
-            display: flex;
-            .notAvailable{
-                display: none;
-            }
-            div{
-                width: 27px;
-                height: 27px;
-                margin: 0 5px;
-            }
-            input{
-                width: 27px;
-                height: 27px;
-                margin: 0 !important;
-                visibility: hidden;
-            }
-            label{
+            .detailEditbutton{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 27px;
-                height: 27px;
-                position: relative;
-                bottom: 30px;
-                text-align: center;
-            }
-            .available{
-                background-color: rgb(133, 212, 133);
-                cursor: pointer;
-                &:hover{
-                    filter: brightness(85%);
+                width: 30px;
+                height: 30px;
+                padding: 0 !important;
+                border-radius: 4px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                .editIcon{
+                    height: 100%;
+                    width: 100%;
+                    margin: 3px;
+                    color: #007bff;
+                    &:hover{
+                        color: white;
+                    }
                 }
-            }
-            .disabled{
-                color: rgb(88, 88, 88);
-                background-color: rgb(216, 136, 136);
-            }
-            .checked{
-                filter: brightness(85%);
-                border: solid rgb(0, 0, 0) 1px;
-            }
-        }
-        .detailPrice{
-            display: flex;
-            align-items: baseline;
-            .prices{
-                display: flex;
-                align-items: baseline;
-                .price{
-                    font-size: 2rem !important;
-                }
-                .canceledPrice{
-                    text-decoration: line-through !important;
-                    font-size: 1.2rem !important;
-                    height: fit-content;
-                    margin-left: 5px;
-                }
-            }
-            .discount{
-                background-color: red;
-                font-size: 2rem !important;
-                height: fit-content;
-                margin-left: 15px;
             }
         }
         .detailBuy{
@@ -133,24 +51,6 @@
             display: flex;
             justify-content: space-between;
             
-        }
-        .detailQuantity{
-            display: flex;
-            button{
-                width: 25px;
-                height: 25px;
-                display: flex;
-                justify-content: center;
-                align-items: baseline;
-                padding: 0;
-            }
-            .quantity{
-                width: 25px;
-                height: 25px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
         }
     }
 }

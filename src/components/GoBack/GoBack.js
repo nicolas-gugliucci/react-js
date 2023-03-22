@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import './GoBack.scss'
 
 export function GoBack ({to}) {
-    const navegate = useNavigate()
+    const navigate = useNavigate()
 
     const goBack = () => {
-        to? navegate(to) : navegate(-1)
+        to? navigate(to) : navigate(-1)
     } 
 
     return (

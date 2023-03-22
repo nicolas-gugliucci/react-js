@@ -1,0 +1,26 @@
+.detailColor{
+    display: flex;
+    .currentColor{
+        border: solid rgb(0, 0, 0) 1px;
+        overflow: hidden;
+        height: 50px;
+        margin: 0 5px;
+        width: auto;
+        height: 50px;
+    }
+    .otherColor{
+        cursor: pointer;
+        &:hover{
+            border: solid rgb(0, 0, 0) 1px;
+            overflow: hidden;
+        }
+    }
+    a{
+        height: 50px;
+        margin: 0 5px;
+        img{
+            width: auto;
+            height: 50px;
+        }
+    }
+}

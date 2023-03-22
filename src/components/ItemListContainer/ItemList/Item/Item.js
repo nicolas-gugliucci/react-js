@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { capitalize } from '../../helpers/capitalize'
+import { capitalize } from '../../../../helpers/capitalize'
 import './Item.scss'
 
 export function Item ({item}) {

@@ -1,0 +1,28 @@
+.datailImages{
+    margin-top: 10px;
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    height: calc(100vh - 210px);
+    img{
+        width: auto;
+        height: calc(100vh - 210px);
+    }
+    .detailImagesColumn{
+        width: 10%;
+        height: calc(100vh - 210px);
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        img{
+            width: 100%;
+            height: auto;
+            margin: 2px 0;
+            border: black solid 1px;
+        }
+    }
+}

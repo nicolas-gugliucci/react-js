@@ -1,0 +1,43 @@
+.detailSize{
+    width: 30%;
+    display: flex;
+    .notAvailable{
+        display: none;
+    }
+    div{
+        width: 27px;
+        height: 27px;
+        margin: 0 5px;
+    }
+    input{
+        width: 27px;
+        height: 27px;
+        margin: 0 !important;
+        visibility: hidden;
+    }
+    label{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 27px;
+        height: 27px;
+        position: relative;
+        bottom: 30px;
+        text-align: center;
+    }
+    .available{
+        background-color: rgb(133, 212, 133);
+        cursor: pointer;
+        &:hover{
+            filter: brightness(85%);
+        }
+    }
+    .disabled{
+        color: rgb(88, 88, 88);
+        background-color: rgb(216, 136, 136);
+    }
+    .checked{
+        filter: brightness(85%);
+        border: solid rgb(0, 0, 0) 1px;
+    }
+}
