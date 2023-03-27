@@ -27,7 +27,7 @@ export function Navbar() {
               <Form.Control className='searchTextbox font4' type="search" placeholder="Type to Search..." />
             </Form>
         </nav>
-        <CartWidget itemList={[]}/>
+        <CartWidget/>
       </header>
     );
 }

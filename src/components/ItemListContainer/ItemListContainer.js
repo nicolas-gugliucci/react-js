@@ -8,7 +8,9 @@ import { ItemList } from './ItemList/ItemList';
 import { Loading } from '../Loading/Loading';
 import './ItemListContainer.scss'
 
+
 export function ItemListContainer() {
+
   const {category} = useParams()
   const [productos, setProducts] = useState([])
   const [loading, setLoading] = useState(true)

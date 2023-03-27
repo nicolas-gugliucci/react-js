@@ -1,25 +1,17 @@
 import './CartWidget.scss'
-import cart from './cart.png'
+import cartLogo from './cart.png'
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { CartContext } from '../../../context/CartContext';
 
-export function CartWidget({itemList}) {
-  const [amount, setAmount]= useState(0)
-  let amountOfItems = 0
 
-  itemList.forEach((item) => {
-    amountOfItems += item.quantity
-  })
-
-  useEffect(()=>{
-    setAmount(amountOfItems)
-  },[amountOfItems])
-
+export function CartWidget() {
+  const {totalQuantity} = useContext(CartContext)
     return (
       <div className='cartContainer'>
-        <Link to="/cart"><img src={cart} alt="cart logo"/></Link>
+        <Link to="/cart"><img src={cartLogo} alt="cart logo"/></Link>
         <div className='amountOfItems font3'>
-          {amount}
+          {totalQuantity()}
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { capitalize } from "../../helpers/capitalize";
 import { GoBack } from '../GoBack/GoBack';
 import Button from 'react-bootstrap/button';
@@ -9,13 +9,14 @@ import { ItemPrice } from "./ItemPrice/ItemPrice";
 import { ItemSize } from "./ItemSize/ItemSize";
 import { ItemColor } from "./ItemColor/ItemColor";
 import { ItemImages } from "./ItemImages/ItemImages";
+import { CartContext } from "../../context/CartContext";
 
 export function ItemDetail({item, itemsColorVariety}) {
+  const {addTocart, quantityInCart, removeFromCart} = useContext(CartContext)
   const [quantity, setQuantity]= useState(1)
   const [radioValue, setRadioValue] = useState('0')
   const [img, setImg] = useState('')
   const [size, setSize] = useState(true)
-  const [onCart, setOnCart] = useState(false)
 
   const sizes = [
     { name: 'XS', value: '0' },
@@ -38,23 +39,23 @@ export function ItemDetail({item, itemsColorVariety}) {
     setQuantity(item.availability.stock[radioValue])
   },[radioValue, item, quantity])
 
-  const addTocart = () => {
+  const obtainSize = () => {
+    return sizes[sizes.indexOf(sizes.find((size) => size.value === radioValue))].name
+  }
+
+  const includeItem = () => {
     const newItem ={
       ...item,
       quantity,
-      size: sizes[sizes.indexOf(sizes.find((size) => size.value === radioValue))].name,
+      size: obtainSize()
     }
-    setOnCart(true)
-    console.log(newItem)
+    addTocart(newItem)
   }
 
-  const removeFromcart = () => {
-    setQuantity(itemCart.quantity)
-    console.log('remover')
-    setOnCart(false)
+  const editItem = () => {
+    setQuantity(quantityInCart(item.id, obtainSize()))
+    removeFromCart(item.id, obtainSize())
   }
-
-  const itemCart = {quantity: 7}
   
   return (
         item ?
@@ -73,14 +74,14 @@ export function ItemDetail({item, itemsColorVariety}) {
                 <ItemSize item={item} radioValue={radioValue} setRadioValue={setRadioValue} size={size}/>
                 <ItemPrice item={item}/>
                 <div>
-                  {onCart?
+                  {quantityInCart(item.id, obtainSize())?
                     <div className="detailEdit">
-                      <p>{itemCart.quantity} on cart</p>
-                      <Button variant="outline-primary" className="detailEditbutton" onClick={removeFromcart}><CiEdit className="editIcon"/></Button>
+                      <p>{quantityInCart(item.id, obtainSize())} on cart</p>
+                      <Button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></Button>
                     </div>
                     :
                     <div className="detailBuy">
-                      <Button variant="success" onClick={addTocart}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</Button>
+                      <Button variant="success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</Button>
                       <ItemCount item={item} radioValue={radioValue} quantity={quantity} setQuantity={setQuantity}/>
                     </div>
                   }
