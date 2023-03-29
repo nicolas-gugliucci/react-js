@@ -23,13 +23,20 @@ export const CartProvider = ({children}) => {
       return cart.reduce((acc, prod) => acc + prod.quantity, 0)
     }
 
+    const editQuantity = (product, quantity) => {
+      const itemToModify = cart.find((item)=> item===product)
+      cart[cart.indexOf(itemToModify)].quantity = quantity
+      setCart([...cart])
+    }
+
     return(
         <CartContext.Provider value={{
             cart,
             addTocart,
             quantityInCart, 
             removeFromCart,
-            totalQuantity
+            totalQuantity,
+            editQuantity
           }}>
             {children}
         </CartContext.Provider>
