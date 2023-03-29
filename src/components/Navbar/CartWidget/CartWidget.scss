@@ -1,11 +1,9 @@
-.cartContainer{
+.linkButton{
+    background: none;
+    border: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    button{
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
     .amountOfItems{
         background-color: black;
         width: 24px;

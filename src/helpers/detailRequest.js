@@ -5,6 +5,6 @@ export function detailRequest (id) {
         setTimeout(() => {
             const itemDetail = MOCK_DATA.find((item) => item.id === Number(id))
             resolve(itemDetail)
-        }, 1500)
+        }, 500)
     })
 }

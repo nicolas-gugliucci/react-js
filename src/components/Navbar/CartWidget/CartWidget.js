@@ -8,11 +8,11 @@ import { CartContext } from '../../../context/CartContext';
 export function CartWidget() {
   const {totalQuantity} = useContext(CartContext)
     return (
-      <div className='cartContainer'>
-        <Link to="/cart"><img src={cartLogo} alt="cart logo"/></Link>
-        <div className='amountOfItems font3'>
-          {totalQuantity()}
-        </div>
-      </div>
+        <Link className={'linkButton'} to="/cart">
+          <img src={cartLogo} alt="cart logo"/>
+          <div className='amountOfItems font3'>
+            {totalQuantity()}
+          </div>
+        </Link>
     );
 }
