@@ -7,6 +7,8 @@ import { GoBack } from '../GoBack/GoBack';
 import { ItemList } from './ItemList/ItemList';
 import { Loading } from '../Loading/Loading';
 import './ItemListContainer.scss'
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from "../../firebase/config"
 
 
 export function ItemListContainer() {
@@ -18,21 +20,28 @@ export function ItemListContainer() {
   
   useEffect(() => {
     setLoading(true)
-    dataRequest()
+    const productsRef = collection(db, "products")
+    let q
+    if(category){
+      if(category === "sale"){
+        q = query(productsRef, where("sale", "==", true))
+      }else if(category === "accesories"){
+        q = query(productsRef, where("section", "==", category))
+      }else{
+        q = query(productsRef, where("category", "==", category))
+      }
+    }else{
+      q = productsRef
+    }
+    getDocs(q)
       .then((response) => {
-        if(category){
-          if(category === "sale"){
-            setProducts(response.filter((item) => item.sale))
-          }else if(category === "accesories"){
-            setProducts(response.filter((item) => item.section === category))
-          }else{
-            setProducts(response.filter((item) => item.category === category))
-            if(!(response.filter((item) => item.category === category).length)){
-              navigate("/")
-            }
-          }
+        if(response.docs.length){
+          const docs = response.docs.map((doc) =>{
+            return {...doc.data(), id: doc.id}
+          })
+          setProducts(docs)
         }else{
-          setProducts(response)
+          navigate("/")
         }
       })
       .catch((error) => {

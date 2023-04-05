@@ -6,12 +6,14 @@ import './Cart.scss'
 import { ItemEditCount } from './ItemEditCount/ItemEditCount'
 import { BsFillTrashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom'
+import { GoBack } from '../GoBack/GoBack'
 
 export function Cart () {
     const {cart, removeFromCart, totalQuantity, total, clean} = useContext(CartContext)
 
     return (
         <div>
+            <GoBack/>
             {totalQuantity()?
                 <div className='totalView'>
                     <div className='halfView'>
@@ -20,7 +22,7 @@ export function Cart () {
                                 <div className="item">
                                     <div className='itemSum'>
                                         <Link to={`/${product.category}/item/${product.id}`}>
-                                            <img src={`./images/${product.images.main}`} alt={product.name}/>
+                                            <img src={`${product.images.main}`} alt={product.name}/>
                                         </Link>
                                         <div className='itemSumInfo'>
                                             <h3>{capitalize(product.name)}</h3>
@@ -55,7 +57,7 @@ export function Cart () {
                     </div>
                     <div className='halfView totalSum'>
                         <h2>{`Total: US$${total().toFixed(2)}`}</h2>
-                        <Button variant='success'>Buy</Button>
+                        <Link to={"/checkout"} variant='success'>Buy</Link>
                     </div>
                 </div>
             :

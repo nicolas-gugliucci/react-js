@@ -5,6 +5,6 @@ export function colorVarietyRequest (originalItem) {
         setTimeout(() => {
             const ItemsColors = MOCK_DATA.filter((item) => (item.name === originalItem.name)&&(item.color !== originalItem.color))
             resolve(ItemsColors)
-        }, 1000)
+        }, 0)
     })
 }

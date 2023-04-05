@@ -6,23 +6,33 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { Cart } from './components/Cart/Cart';
+import { LoginProvider } from './context/LoginContext';
+import { LoginScreen } from './components/LoginScreen/LoginScreen';
+import { RegisterScreen } from './components/RegisterScreen/RegisterScreen';
+import { Checkout } from './components/Checkout/Checkout';
 
 
 function App() {
 
   return (
     <div>
-    <CartProvider>
-      <BrowserRouter>
-        <Navbar/>
-        <Routes>
-          <Route path='/' element={<ItemListContainer/>}/>
-          <Route path='/:category' element={<ItemListContainer/>}/>
-          <Route path='/:category/item/:id' element={<ItemDetailContainer/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-        </Routes>
-      </BrowserRouter>
-    </CartProvider>
+      <LoginProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Navbar/>
+            <Routes>
+              <Route path='/login' element={<LoginScreen/>}/>
+              <Route path='/checkout' element={<Checkout/>}/>
+              <Route path='/register' element={<RegisterScreen/>}/>
+              <Route path='/' element={<ItemListContainer/>}/>
+              <Route path='/:category' element={<ItemListContainer/>}/>
+              <Route path='/:category/item/:id' element={<ItemDetailContainer/>}/>
+              <Route path='/cart' element={<Cart/>}/>
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </LoginProvider>
+    
         
       
     </div>
