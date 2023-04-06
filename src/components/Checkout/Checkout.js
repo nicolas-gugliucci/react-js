@@ -91,10 +91,9 @@ export function Checkout () {
                 response.docs.forEach((doc) => {
                     const item = cart.find((item) => item.id === doc.id)
                     if(doc.data().availability.stock[obtainSize(item.size)] >= item.quantity){
-                        console.log(doc.data().availability.stock[obtainSize(item.size)])
-                        // batch.update(doc.ref,{
-                        //     [stock[obtainSize(item.size)]]: doc.data().availability.stock[obtainSize(item.size)] - item.quantity
-                        // })
+                        batch.update(doc.ref,{
+                            availability: {stock: [obtainSize(item.size)] : doc.data().availability.stock[obtainSize(item.size)] - item.quantity}
+                        })
                     }else{
                         outOfStock.push(item)
                     }
