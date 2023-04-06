@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { capitalize } from '../../helpers/capitalize';
-import { dataRequest } from '../../helpers/dataRequest';
 import { GoBack } from '../GoBack/GoBack';
 import { ItemList } from './ItemList/ItemList';
 import { Loading } from '../Loading/Loading';

@@ -14,7 +14,10 @@ import { CartContext } from "../../context/CartContext";
 export function ItemDetail({item, itemsColorVariety}) {
   const {addTocart, quantityInCart, removeFromCart} = useContext(CartContext)
   const [quantity, setQuantity]= useState(1)
-  const [radioValue, setRadioValue] = useState('0')
+
+  const initialValue = item.availability.stock.indexOf(item.availability.stock.find((size) => size))
+  
+  const [radioValue, setRadioValue] = useState(String(initialValue))
   const [img, setImg] = useState('')
   const [size, setSize] = useState(true)
 
@@ -24,6 +27,7 @@ export function ItemDetail({item, itemsColorVariety}) {
     { name: 'M', value: '2' },
     { name: 'L', value: '3' },
     { name: 'XL', value: '4' },
+    { name: 'Unique size', value: '-1' }
   ];
   
   useEffect(()=>{
@@ -69,23 +73,27 @@ export function ItemDetail({item, itemsColorVariety}) {
                   <p>{item.description}</p>
                 </div>
                 {itemsColorVariety &&
-                  <ItemColor item={item} itemsColorVariety={itemsColorVariety}/>
+                  itemsColorVariety.length > 1 &&
+                    <ItemColor item={item} itemsColorVariety={itemsColorVariety}/>
                 }
                 <ItemSize item={item} radioValue={radioValue} setRadioValue={setRadioValue} size={size}/>
                 <ItemPrice item={item}/>
-                <div>
-                  {quantityInCart(item.id, obtainSize())?
-                    <div className="detailEdit">
-                      <p>{quantityInCart(item.id, obtainSize())} on cart</p>
-                      <Button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></Button>
+                {initialValue === -1 
+                  ? <strong>Sold out</strong>
+                  : <div>
+                      {quantityInCart(item.id, obtainSize())?
+                        <div className="detailEdit">
+                          <p>{quantityInCart(item.id, obtainSize())} on cart</p>
+                          <Button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></Button>
+                        </div>
+                        :
+                        <div className="detailBuy">
+                          <Button variant="success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</Button>
+                          <ItemCount item={item} radioValue={radioValue} quantity={quantity} setQuantity={setQuantity}/>
+                        </div>
+                      }
                     </div>
-                    :
-                    <div className="detailBuy">
-                      <Button variant="success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</Button>
-                      <ItemCount item={item} radioValue={radioValue} quantity={quantity} setQuantity={setQuantity}/>
-                    </div>
-                  }
-                </div>
+                }
               </div>
             </div>
           </div>
