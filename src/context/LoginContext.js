@@ -25,11 +25,9 @@ export const LoginProvider = ({children}) => {
     const register = (values) => {
         createUserWithEmailAndPassword(auth, values.email, values.password)
             .then(()=>{
+                login(values)
                 updateProfile(auth.currentUser, {
                     displayName: `${values.name} ${values.surname}`,
-                })
-                .then(() => {
-                    login(values)
                 })
             })
             .catch((err) => {

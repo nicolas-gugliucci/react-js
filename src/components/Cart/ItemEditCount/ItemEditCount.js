@@ -34,8 +34,7 @@ export function ItemEditCount ({product, size, originalQuantity}) {
     const subtract = () => {
         (quantity > 1) && setQuantity(quantity -1)
     }
-    
-    console.log(product.availability.stock[sizeIndex])
+   
     return (
             <div className="detailQuantity">
                 <Button variant="outline-danger" disabled={quantity<=1} onClick={subtract}>-</Button>

@@ -14,7 +14,6 @@ export function Navbar({userViewExpanded, setUserViewExpanded}) {
   const userExpand = () => {
     const prevState = !userViewExpanded
     setUserViewExpanded(prevState)
-    console.log(userViewExpanded)
   }
 
   const display = () => userViewExpanded? "": "ocult"
