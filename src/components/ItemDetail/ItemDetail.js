@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { capitalize } from "../../helpers/capitalize";
 import { GoBack } from '../GoBack/GoBack';
-import Button from 'react-bootstrap/button';
 import { CiEdit } from 'react-icons/ci';
 import './ItemDetail.scss'
 import { ItemCount } from "./ItemCount/ItemCount";
@@ -10,6 +9,7 @@ import { ItemSize } from "./ItemSize/ItemSize";
 import { ItemColor } from "./ItemColor/ItemColor";
 import { ItemImages } from "./ItemImages/ItemImages";
 import { CartContext } from "../../context/CartContext";
+import { Button } from "react-bootstrap";
 
 export function ItemDetail({item, itemsColorVariety}) {
   const {addTocart, quantityInCart, removeFromCart} = useContext(CartContext)
