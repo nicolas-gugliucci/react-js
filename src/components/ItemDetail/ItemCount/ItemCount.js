@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/button';
+import { Button } from 'react-bootstrap';
 import './ItemCount.scss'
 
 export function ItemCount ({item, radioValue, quantity, setQuantity}) {
