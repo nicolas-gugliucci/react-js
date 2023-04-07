@@ -18,7 +18,7 @@ Klash & Mor es un E-commerce de ropa masculina y femenina. El mismo, permite al 
 
 **Para la ejecución del proyecto se podrá clonar el proyecto y ejecutar el siguiente comando:**
 
-### `npm start`
+# `npm start`
 
 **o bien, ingresar al siguiente link para visualizarlo en la web:**
 
