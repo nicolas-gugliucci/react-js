@@ -78,7 +78,7 @@ export function ItemListContainer() {
         setSubProducts(filtered)
       }
     }
-  },[value])
+  },[value, productos])
 
   return (
     loading?

@@ -5,7 +5,7 @@
     .halfView{
         margin: 35px 0 35px 35px;
         padding-right: 35px;
-        width: calc(50vw - 35px);
+        width: calc(100vw - 400px);
         height: calc(100vh - 220px);
         overflow-y: scroll;
         overflow-x: hidden;
@@ -23,10 +23,10 @@
         }
         .itemContainer{
             hr{
-                width: calc(50vw - 80px);
+                width: calc(100vw - 465px);
             }
             .item{
-                width: 100;
+                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 height: 120px;
@@ -90,8 +90,12 @@
     }
     .totalSum{
         margin: 35px;
-        width: calc(50vw - 35px);
+        width: 350px;
         height: calc(100vh - 220px);
         overflow: hidden;
+        text-align: center;
+        button{
+            width:300px;
+        }
     }
 }

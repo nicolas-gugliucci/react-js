@@ -17,7 +17,7 @@ export function ItemEditCount ({product, size, originalQuantity}) {
 
     useEffect(()=>{
         editQuantity(product, quantity)
-    },[quantity])
+    },[quantity, editQuantity, product])
 
     const add = () => {
         (product.availability.stock[sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))] > quantity) && setQuantity(quantity +1)
@@ -28,9 +28,9 @@ export function ItemEditCount ({product, size, originalQuantity}) {
 
     return (
             <div className="detailQuantity">
-                <Button variant="outline-danger"  onClick={subtract}>-</Button>
+                <Button variant="outline-danger" disabled={quantity<=1} onClick={subtract}>-</Button>
                 <div className="quantity">{quantity}</div>
-                <Button variant="outline-success" onClick={add}>+</Button>
+                <Button variant="outline-success" disabled={quantity>=product.availability.stock[sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))]} onClick={add}>+</Button>
             </div>
     )
 }

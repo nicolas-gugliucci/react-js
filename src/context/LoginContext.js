@@ -9,7 +9,8 @@ export const LoginProvider = ({children}) => {
         email: null,
         name: null,
         logged: false,
-        userid: null
+        userid: null,
+        img: null
     })
 
     const googleLogin = () => {
@@ -31,7 +32,12 @@ export const LoginProvider = ({children}) => {
                     login(values)
                 })
             })
-            .catch((err) => console.log(err.message))
+            .catch((err) => {
+                if(err.message === "Firebase: Error (auth/email-already-in-use)."){
+                    alert("This E-mail is already registered")
+                }
+                console.log(err.message)
+            })
     }
 
     const logout = () => {
@@ -41,7 +47,8 @@ export const LoginProvider = ({children}) => {
                     email: null,
                     name: null,
                     logged: false,
-                    userid: null
+                    userid: null,
+                    img: null
                 })
             })
     }
@@ -53,14 +60,15 @@ export const LoginProvider = ({children}) => {
                     email: user.email,
                     name: user.displayName,
                     logged: true,
-                    userid: user.uid
+                    userid: user.uid,
+                    img: user.photoURL
                 })
             } else {
                 logout()
             }
         })
     }, [])
-
+    
 
     return (
         <LoginContext.Provider value={{

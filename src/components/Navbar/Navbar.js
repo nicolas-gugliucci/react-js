@@ -3,7 +3,7 @@ import logo from './logo.png'
 import { BsPersonCircle } from 'react-icons/bs'
 import './Navbar.scss'
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
 import { Button } from 'react-bootstrap';
 
@@ -11,7 +11,6 @@ import { Button } from 'react-bootstrap';
 export function Navbar({userViewExpanded, setUserViewExpanded}) {
   const { user, logout } = useContext(LoginContext)
   
-
   const userExpand = () => {
     const prevState = !userViewExpanded
     setUserViewExpanded(prevState)
@@ -41,7 +40,10 @@ export function Navbar({userViewExpanded, setUserViewExpanded}) {
           </div>
           
           <div className='userInfo'>
-            <Button onClick={userExpand} variant='outline-dark' className='userIcon'><BsPersonCircle/></Button>
+            {user.img
+            ?<Button onClick={userExpand} variant='outline-dark' className='userIcon'><img src={user.img} alt="user profile"/></Button>
+            :<Button onClick={userExpand} variant='outline-dark' className='userIcon'><BsPersonCircle/></Button>
+            }
             {user.name
               ? <p className='userWelcome font4'>{`Welcome ${user.name}`}</p>
               : user.email 
@@ -53,11 +55,11 @@ export function Navbar({userViewExpanded, setUserViewExpanded}) {
           {userViewExpanded
             && user.email
               ? <div className={`userOptions ${display()}`}>
-                  <Button onClick={logout}>Logout</Button>
+                  <Button className='oulineButton' onClick={logout}>Logout</Button>
                 </div>
               : <div className={`userOptions ${display()}`}>
-                  <Link className='userIcon' to="/login">Login</Link>
-                  <Link className='userIcon' to="/register">Sing up</Link>
+                  <Button className='oulineButton'><Link className='userIcon' to="/login">Login</Link></Button>
+                  <Button className='oulineButton'><Link className='userIcon' to="/register">Sing up</Link></Button>
                 </div>
           }
         </div>

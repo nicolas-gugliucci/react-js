@@ -55,9 +55,9 @@ export function Cart () {
                         ))}
                         <Button variant='danger' onClick={clean}>Clean cart</Button>
                     </div>
-                    <div className='halfView totalSum'>
+                    <div className='totalSum'>
                         <h2>{`Total: US$${total().toFixed(2)}`}</h2>
-                        <Link to={"/checkout"} variant='success'>Buy</Link>
+                        <Button variant='success'><Link to={"/checkout"} variant='success'>Buy</Link></Button>
                     </div>
                 </div>
             :

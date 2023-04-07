@@ -96,6 +96,11 @@ header{
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                img{
+                    border-radius: 50%;
+                    height: 35px;
+                    width: 35px;
+                }
             }
             .userWelcome{
                 font-size: 2rem;
@@ -119,6 +124,22 @@ header{
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+            .oulineButton{
+                background-color: transparent !important;
+                border-color: rgb(159, 118, 41) !important;
+                color: rgb(159, 118, 41) !important;
+                a{
+                    color: rgb(159, 118, 41) !important;
+                }
+                &:hover{
+                    background-color: rgb(159, 118, 41) !important;
+                    color: black !important;
+                    a{
+                        color: black !important;
+                    }
+                }
+                
+            }
         }
         .ocult{
             visibility: hidden;

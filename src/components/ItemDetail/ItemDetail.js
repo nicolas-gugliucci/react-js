@@ -34,10 +34,12 @@ export function ItemDetail({item, itemsColorVariety}) {
     item&&
       setImg(item.images.main)
       setSize(item.availability.size.filter((size) => size === true).length !== 0)
-  },[item])
+      !size&&setRadioValue("-1")
+  },[item, size])
 
   useEffect(()=>{
     item &&
+    radioValue !== "-1" &&
     item.availability.stock[radioValue] &&
     quantity>item.availability.stock[radioValue] && 
     setQuantity(item.availability.stock[radioValue])
@@ -70,10 +72,11 @@ export function ItemDetail({item, itemsColorVariety}) {
               <div className="detailInfo">
                 <h3>{capitalize(item.name)+" - "+capitalize(item.color)}</h3>
                 <div>
-                  <p>{item.description}</p>
+                  {item.description &&
+                    <p>{capitalize(item.description)}</p>
+                  }
                 </div>
                 {itemsColorVariety &&
-                  itemsColorVariety.length > 1 &&
                     <ItemColor item={item} itemsColorVariety={itemsColorVariety}/>
                 }
                 <ItemSize item={item} radioValue={radioValue} setRadioValue={setRadioValue} size={size}/>

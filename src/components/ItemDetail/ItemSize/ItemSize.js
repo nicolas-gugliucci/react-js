@@ -2,27 +2,27 @@ import './ItemSize.scss'
 
 export function ItemSize ({item, radioValue, setRadioValue, size}) {
 
-const sizes = [
-    { name: 'XS', value: '0' },
-    { name: 'S', value: '1' },
-    { name: 'M', value: '2' },
-    { name: 'L', value: '3' },
-    { name: 'XL', value: '4' },
-    { name: 'Unique size', value: '-1' }
-];
+    const sizes = [
+        { name: 'XS', value: '0' },
+        { name: 'S', value: '1' },
+        { name: 'M', value: '2' },
+        { name: 'L', value: '3' },
+        { name: 'XL', value: '4' },
+        { name: 'Unique size', value: '-1' }
+    ];
 
-const notSizeStyle = (i) => (!item.availability.size[i]?"notAvailable":{})
-const sizeStyle = (i) => {
-    if (item.availability.size[i] && item.availability.stock[i]) {
-        if (radioValue === i){
-            return "available checked"
+    const notSizeStyle = (i) => (!item.availability.size[i]?"notAvailable":{})
+    const sizeStyle = (i) => {
+        if (item.availability.size[i] && item.availability.stock[i]) {
+            if (radioValue === i){
+                return "available checked"
+            }else{
+                return "available"
+            }
         }else{
-            return "available"
+            return "disabled"
         }
-    }else{
-        return "disabled"
     }
-}
 
     return (
         <div>
@@ -37,7 +37,6 @@ const sizeStyle = (i) => {
                 ))
                 :
                 <div className='uniqueSizeDiv'>
-                    {setRadioValue("-1")}
                     <input type="radio" value={sizes[5].value} name="size" defaultChecked={item.availability.stock[0]!==0} disabled={item.availability.stock[0]===0}/>
                     <label htmlFor={sizes[5].name} className={item.availability.stock[0]?"available checked":"disabled"}>{sizes[5].name}</label>
                 </div>

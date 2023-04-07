@@ -36,7 +36,7 @@ export function ItemDetailContainer() {
       .finally(()=>{
         setLoading(false)
       })
-  },[id])
+  },[id, navigate])
 
   useEffect(() => {
     if(item){

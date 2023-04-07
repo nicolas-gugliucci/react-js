@@ -13,3 +13,55 @@
         background-color: transparent;
     }
 }
+.orderSumContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 150px);
+    background: radial-gradient(circle, rgba(245,222,179,1) 0%, rgba(255,255,255,1) 100%);
+
+    .orderSum {
+        width: 700px;
+        padding: 26px;
+        border-radius: 10px;
+        border: 1px solid black;
+        background-color: transparent;
+        h4{
+            font-size: 1.4rem !important;
+            .subtitle{
+                font-size: 1.7rem !important;
+                display: inline-block;
+            }
+        }
+        .title{
+            text-align: center;
+            margin: 5px 0 20px 0;
+            strong{
+                font-size: 2.3rem !important;
+            }
+        }
+        .itemsSum{
+            display: flex;
+            flex-direction: column;
+            .itemLine{
+                margin-left: 30px;
+                font-size: 1.3rem !important;
+            }
+        }
+        .buttonHome{
+            background-color: transparent !important;
+            border-color: rgb(159, 118, 41) !important;
+            a{
+                color: rgb(159, 118, 41) !important;
+            }
+            &:hover{
+                background-color: rgb(159, 118, 41) !important;
+                a{
+                    color: black !important;
+                }
+            }
+            
+        }
+    }
+}

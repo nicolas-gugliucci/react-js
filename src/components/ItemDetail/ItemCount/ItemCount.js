@@ -4,7 +4,11 @@ import './ItemCount.scss'
 export function ItemCount ({item, radioValue, quantity, setQuantity}) {
 
     const add = () => {
-        (item.availability.stock[radioValue] > quantity) && setQuantity(quantity +1)
+        if(radioValue === "-1"){
+            (item.availability.stock[0] > quantity) && setQuantity(quantity +1)
+        }else{
+            (item.availability.stock[radioValue] > quantity) && setQuantity(quantity +1)
+        }
     }
     const subtract = () => {
         (quantity > 1) && setQuantity(quantity -1)
@@ -12,9 +16,12 @@ export function ItemCount ({item, radioValue, quantity, setQuantity}) {
 
     return (
             <div className="detailQuantity">
-                <Button variant="outline-danger"  onClick={subtract}>-</Button>
+                <Button variant="outline-danger" disabled={quantity<=1} onClick={subtract}>-</Button>
                 <div className="quantity">{quantity}</div>
-                <Button variant="outline-success" onClick={add}>+</Button>
+                {radioValue==="-1"
+                ?<Button variant="outline-success" disabled={quantity>=item.availability.stock[0]} onClick={add}>+</Button>
+                :<Button variant="outline-success" disabled={quantity>=item.availability.stock[radioValue]} onClick={add}>+</Button>
+                }
             </div>
     )
 }
