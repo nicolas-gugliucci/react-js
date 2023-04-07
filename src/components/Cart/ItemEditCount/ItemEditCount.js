@@ -13,6 +13,7 @@ export function ItemEditCount ({product, size, originalQuantity}) {
         { name: 'M', value: '2' },
         { name: 'L', value: '3' },
         { name: 'XL', value: '4' },
+        { name: 'UNIQUE SIZE', value: '-1' },
     ];
 
     useEffect(()=>{
@@ -20,18 +21,26 @@ export function ItemEditCount ({product, size, originalQuantity}) {
         // eslint-disable-next-line
     },[quantity, product])
 
+    let sizeIndex
+    if(sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))===-1){
+        sizeIndex = 0
+    }else{
+        sizeIndex = sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))
+    }
+
     const add = () => {
-        (product.availability.stock[sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))] > quantity) && setQuantity(quantity +1)
+        (product.availability.stock[sizeIndex] > quantity) && setQuantity(quantity +1)
     }
     const subtract = () => {
         (quantity > 1) && setQuantity(quantity -1)
     }
-
+    
+    console.log(product.availability.stock[sizeIndex])
     return (
             <div className="detailQuantity">
                 <Button variant="outline-danger" disabled={quantity<=1} onClick={subtract}>-</Button>
                 <div className="quantity">{quantity}</div>
-                <Button variant="outline-success" disabled={quantity>=product.availability.stock[sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))]} onClick={add}>+</Button>
+                <Button variant="outline-success" disabled={quantity>=product.availability.stock[sizeIndex]} onClick={add}>+</Button>
             </div>
     )
 }
