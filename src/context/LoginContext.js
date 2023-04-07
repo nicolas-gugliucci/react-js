@@ -29,6 +29,10 @@ export const LoginProvider = ({children}) => {
                 updateProfile(auth.currentUser, {
                     displayName: `${values.name} ${values.surname}`,
                 })
+                .then(() => {
+                    logout()
+                    login(values)
+                })
             })
             .catch((err) => {
                 if(err.message === "Firebase: Error (auth/email-already-in-use)."){

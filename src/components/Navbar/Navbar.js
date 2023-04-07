@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
 import { Button } from 'react-bootstrap';
+import { capitalize } from '../../helpers/capitalize'
 
 
 export function Navbar({userViewExpanded, setUserViewExpanded}) {
@@ -44,7 +45,7 @@ export function Navbar({userViewExpanded, setUserViewExpanded}) {
             :<Button onClick={userExpand} variant='outline-dark' className='userIcon'><BsPersonCircle/></Button>
             }
             {user.name
-              ? <p className='userWelcome font4'>{`Welcome ${user.name}`}</p>
+              ? <p className='userWelcome font4'>{`Welcome ${capitalize(user.name)}`}</p>
               : user.email 
                 ? <p className='userWelcome font4'>{`Welcome ${user.email}`}</p>
                 : <p></p>
