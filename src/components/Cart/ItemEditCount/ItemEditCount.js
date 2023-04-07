@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import Button from 'react-bootstrap/button';
+import { Button } from 'react-bootstrap/button';
 import { CartContext } from '../../../context/CartContext';
 import './ItemEditCount.scss'
 
