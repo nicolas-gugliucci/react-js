@@ -17,7 +17,8 @@ export function ItemEditCount ({product, size, originalQuantity}) {
 
     useEffect(()=>{
         editQuantity(product, quantity)
-    },[quantity, editQuantity, product])
+        // eslint-disable-next-line
+    },[quantity, product])
 
     const add = () => {
         (product.availability.stock[sizes.indexOf(sizes.find((sizeInArray) => sizeInArray.name === size))] > quantity) && setQuantity(quantity +1)
