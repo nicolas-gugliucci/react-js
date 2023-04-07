@@ -9,7 +9,7 @@ import { ItemSize } from "./ItemSize/ItemSize";
 import { ItemColor } from "./ItemColor/ItemColor";
 import { ItemImages } from "./ItemImages/ItemImages";
 import { CartContext } from "../../context/CartContext";
-import { Button } from "react-bootstrap";
+
 
 export function ItemDetail({item, itemsColorVariety}) {
   const {addTocart, quantityInCart, removeFromCart} = useContext(CartContext)
@@ -87,11 +87,11 @@ export function ItemDetail({item, itemsColorVariety}) {
                       {quantityInCart(item.id, obtainSize())?
                         <div className="detailEdit">
                           <p>{quantityInCart(item.id, obtainSize())} on cart</p>
-                          <Button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></Button>
+                          <button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></button>
                         </div>
                         :
                         <div className="detailBuy">
-                          <Button variant="success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</Button>
+                          <button variant="success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</button>
                           <ItemCount item={item} radioValue={radioValue} quantity={quantity} setQuantity={setQuantity}/>
                         </div>
                       }
