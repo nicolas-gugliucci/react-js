@@ -87,11 +87,11 @@ export function ItemDetail({item, itemsColorVariety}) {
                       {quantityInCart(item.id, obtainSize())?
                         <div className="detailEdit">
                           <p>{quantityInCart(item.id, obtainSize())} on cart</p>
-                          <button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></button>
+                          <button className="detailEditbutton btn btn-success" onClick={editItem}><CiEdit className="editIcon"/></button>
                         </div>
                         :
                         <div className="detailBuy">
-                          <button variant="success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</button>
+                          <button className="btn btn-success" onClick={includeItem}>Buy US${item.sale ? (quantity*(item.price - item.discount*item.price/100)).toFixed(2) : (quantity*item.price).toFixed(2)}</button>
                           <ItemCount item={item} radioValue={radioValue} quantity={quantity} setQuantity={setQuantity}/>
                         </div>
                       }
