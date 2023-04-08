@@ -60,20 +60,6 @@ export function Checkout () {
             date: new Date(),
         })
 
-        // const productsRef = collection(db, 'products')
-
-        // cart.forEach((item) => {
-        //     const docRef = doc(productsRef, item.id)
-        //     getDoc(docRef)
-        //         .then((doc) => {
-        //             if(doc.data().stock >= item.quantity){
-        //                 updateDoc(docRef,{
-        //                     stock: doc.data().stock - item.quantity
-        //                 })
-        //             }
-        //         })            
-        // });
-
         const obtainSize = (selectedSize) => {
             if(sizes[sizes.indexOf(sizes.find((size) => size.name === selectedSize))].value === '-1'){
                 return 0
@@ -100,19 +86,22 @@ export function Checkout () {
         getDocs(itemsRef)
             .then((response) => {
                 response.docs.forEach((doc) => {
-                    console.log(doc.data())
-                    let item = cart.find((item) => item.id === doc.id)
-                    if(doc.data().availability.stock[obtainSize(item.size)] >= item.quantity){
-                        const dataSize = doc.data().availability.size
-                        let newStock = doc.data().availability.stock
-                        newStock[obtainSize(item.size)] = doc.data().availability.stock[obtainSize(item.size)] - item.quantity
-                        batch.update(doc.ref,{
-                            availability: {stock: newStock, size: dataSize}
-                        })
-                    }else{
-                        editQuantity(item,doc.data().availability.stock[obtainSize(item.size)])
-                        outOfStock.push(item)
-                    }
+                    cart.forEach((product) => {
+                        if(product.id === doc.id){
+                            let item = product
+                            if(doc.data().availability.stock[obtainSize(item.size)] >= item.quantity){
+                                const dataSize = doc.data().availability.size
+                                let newStock = doc.data().availability.stock
+                                newStock[obtainSize(item.size)] = doc.data().availability.stock[obtainSize(item.size)] - item.quantity
+                                batch.update(doc.ref,{
+                                    availability: {stock: newStock, size: dataSize}
+                                })
+                            }else{
+                                editQuantity(item,doc.data().availability.stock[obtainSize(item.size)])
+                                outOfStock.push(item)
+                            }
+                        }
+                    })
                 })
                 if (outOfStock.length === 0){
                     batch.commit()
@@ -120,20 +109,23 @@ export function Checkout () {
                             addDoc(ordersRef, orden)
                                 .then((doc)=>{
                                     setOrderId(doc.id)
-                                    console.log(orderId)
                                     clean()
                                 })
                         })
                         .finally(() => {
                             setLoading(false)
                         })
+                        //({name: item.name, color: item.color, size: item.size, quantity: item.quantity})
                 }else{
                     const MySwal = withReactContent(Swal)
                     MySwal.fire({
                         icon: 'warning',
                         title: <p>Someone beat you to it!</p>,
                         html: `Sorry, we are unable to fulfill your order at this time. The inventory of the following items has recently changed and there is not enough quantity to fill your order:
-                                <br>${outOfStock.map((item)=>{return (<p>{item.name}</p>)})}
+                                <br>
+                                <br>
+                                ${outOfStock.map(item=> `${item.name} - ${item.color} | Size: ${item.size} | Available stock: ${item.quantity}`).join(' ')}
+                                <br>
                                 <br>Do you want to confirm the order with the available stock anyways? 
                                 `,
                                 
@@ -176,7 +168,7 @@ export function Checkout () {
                     <h4><p className='subtitle'>Address:</p>{` ${capitalize(orden.user.address)}`}</h4>
                     
                     <h4 className='itemsSum'><p className='subtitle'>Items:</p> 
-                        {orden.items.map((item)=> <p className='itemLine' key={item.id}>{`${capitalize(item.name)} - ${capitalize(item.color)}  | Size: ${capitalize(item.size)} | x${item.quantity}`}</p>)}
+                        {orden.items.map((item)=> <p className='itemLine' key={`${item.id}_${item.size}`}>{`${capitalize(item.name)} - ${capitalize(item.color)}  | Size: ${capitalize(item.size)} | x${item.quantity}`}</p>)}
                     </h4>
                     <h4><p className='subtitle'>Total of the order:</p>{` US$${orden.total}`}</h4>
                     <h3 className='title'>{`Save your order id: `}<strong>{orderId}</strong></h3>
