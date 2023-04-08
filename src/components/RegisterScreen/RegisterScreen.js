@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 const schema = Yup.object().shape({
     name: Yup.string()
                 .required('Este campo es obligatorio')
-                .min(4, 'Mínimo 4 caracteres')
+                .min(3, 'Mínimo 3 caracteres')
                 .max(30, 'Máximo 30 caracteres'),
     surname: Yup.string()
                 .required('Este campo es obligatorio')
@@ -35,7 +35,7 @@ export function RegisterScreen () {
 
     useEffect(()=>{
         if(user.email){
-            navigate(-2)
+            navigate("/")
         }
     },[user, navigate])
 

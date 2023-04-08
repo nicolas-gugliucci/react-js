@@ -28,7 +28,7 @@ export function LoginScreen () {
 
     useEffect(()=>{
         if(user.email){
-            navigate(-1)
+            navigate("/")
         }
     },[user, navigate])
 

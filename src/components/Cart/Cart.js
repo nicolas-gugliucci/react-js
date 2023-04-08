@@ -57,7 +57,7 @@ export function Cart () {
                     </div>
                     <div className='totalSum'>
                         <h2>{`Total: US$${total().toFixed(2)}`}</h2>
-                        <Button variant='success'><Link to={"/checkout"} variant='success'>Buy</Link></Button>
+                        <Link to={"/checkout"} className='btn btn-success large'>Buy</Link>
                     </div>
                 </div>
             :

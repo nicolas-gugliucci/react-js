@@ -11,11 +11,15 @@ import { Loading } from '../Loading/Loading'
 import { capitalize } from '../../helpers/capitalize'
 import { Formik } from 'formik'
 import * as Yup from 'yup';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+
 
 const schema = Yup.object().shape({
     name: Yup.string()
                 .required('Este campo es obligatorio')
-                .min(4, 'Mínimo 4 caracteres')
+                .min(3, 'Mínimo 3 caracteres')
                 .max(30, 'Máximo 30 caracteres'),
     surname: Yup.string()
                 .required('Este campo es obligatorio')
@@ -32,21 +36,24 @@ const schema = Yup.object().shape({
 
 
 export function Checkout () {
-    const { total , clean, cart } = useContext(CartContext)
+    const { total , clean, cart, editQuantity } = useContext(CartContext)
     const { user } = useContext(LoginContext)
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState('')
-    const [orden, setOrden] = useState({
-        user:'',
-        items:'',
-        total:'',
-        date:''
-    })
+    const [orden, setOrder] = useState(
+        {
+            user: '',
+            items:'',
+            total:'',
+            date:''
+        }
+    )
+
     
     const ordermaker = (values) => {
         setLoading(true)
-        setOrden({
+        setOrder({
             user: values,
             items: cart.map((item)=>({id: item.id, name: item.name, color: item.color, size: item.size, price: item.price, quantity: item.quantity})),
             total: total(),
@@ -88,12 +95,13 @@ export function Checkout () {
         const ordersRef = collection(db, 'orders')
         const productsRef = collection(db, 'products')
         const outOfStock = []
-        const itemsRef = query(productsRef, where(documentId(), 'in', cart.map((item) => item.id)))
-        
+        let itemsRef = query(productsRef, where(documentId(), 'in', cart.map((item) => item.id)))
+
         getDocs(itemsRef)
             .then((response) => {
                 response.docs.forEach((doc) => {
-                    const item = cart.find((item) => item.id === doc.id)
+                    console.log(doc.data())
+                    let item = cart.find((item) => item.id === doc.id)
                     if(doc.data().availability.stock[obtainSize(item.size)] >= item.quantity){
                         const dataSize = doc.data().availability.size
                         let newStock = doc.data().availability.stock
@@ -102,6 +110,7 @@ export function Checkout () {
                             availability: {stock: newStock, size: dataSize}
                         })
                     }else{
+                        editQuantity(item,doc.data().availability.stock[obtainSize(item.size)])
                         outOfStock.push(item)
                     }
                 })
@@ -111,6 +120,7 @@ export function Checkout () {
                             addDoc(ordersRef, orden)
                                 .then((doc)=>{
                                     setOrderId(doc.id)
+                                    console.log(orderId)
                                     clean()
                                 })
                         })
@@ -118,10 +128,43 @@ export function Checkout () {
                             setLoading(false)
                         })
                 }else{
-                    alert("hay items sin stock")
+                    const MySwal = withReactContent(Swal)
+                    MySwal.fire({
+                        icon: 'warning',
+                        title: <p>Someone beat you to it!</p>,
+                        html: `Sorry, we are unable to fulfill your order at this time. The inventory of the following items has recently changed and there is not enough quantity to fill your order:
+                                <br>${outOfStock.map((item)=>{return (<p>{item.name}</p>)})}
+                                <br>Do you want to confirm the order with the available stock anyways? 
+                                `,
+                                
+                        showCancelButton: true,
+                        confirmButtonColor: '#28a745',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes!',
+                        reverseButtons: true
+                    })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                MySwal.fire(
+                                'Great!',
+                                'Your new order has been sent.',
+                                'success'
+                                )
+                                setLoading(false)
+                                ordermaker(values)
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                MySwal.fire(
+                                'Cancelled',
+                                'We apologize for any inconvenience this may cause.',
+                                'error'
+                                )
+                                    .then(()=>{
+                                        navigate("/cart")
+                                    })
+                            }
+                        })
                 }
             })
-            
     }
 
     if(orderId){
@@ -144,7 +187,8 @@ export function Checkout () {
     }else if(cart.length === 0){
         navigate(-1)
     }
-
+        
+    
     return (
         loading
             ? <Loading/>
