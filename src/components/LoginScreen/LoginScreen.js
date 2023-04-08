@@ -66,13 +66,14 @@ export function LoginScreen () {
                                     name='password'
                                 />
                                 {errors.password && <p className="alert alert-danger">{errors.password}</p>}
-
-                                <Button className='btn btn-success' type='submit' disabled={isSubmitting}>Login</Button>
-                                <Link to="/register">Sing up</Link>
+                                <div className='buttonsContainer'>
+                                    <Button className='btn outlineButton' type='submit' disabled={isSubmitting}>Login</Button>
+                                    <Link className='linkButton' to="/register">Sing up</Link>
+                                </div>
                             </form>
                         )}
                     </Formik>
-                <button className='btn btn-outline-primary' onClick={googleLogin}><FcGoogle/> Login with google</button>
+                <button className='outlineButton btn' onClick={googleLogin}><FcGoogle/> Login with google</button>
             </div>
         </div>
     )

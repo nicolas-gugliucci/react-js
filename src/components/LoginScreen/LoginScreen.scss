@@ -12,5 +12,32 @@
         border-radius: 10px;
         border: 1px solid black;
         background-color: transparent;
+        .buttonsContainer{
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            .linkButton{
+                color: rgb(159, 118, 41)  !important;
+                text-decoration: underline !important;
+            }
+        }
+        
+        .outlineButton{
+            margin-top: 5px;
+            background-color: transparent !important;
+            border-color: rgb(159, 118, 41) !important;
+            color: rgb(159, 118, 41) !important;
+            a{
+                color: rgb(159, 118, 41) !important;
+            }
+            &:hover{
+                background-color: rgb(159, 118, 41) !important;
+                color: black !important;
+                a{
+                    color: black !important;
+                }
+            }
+            
+        }
     }
 }

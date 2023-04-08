@@ -95,9 +95,10 @@ export function RegisterScreen () {
                                     name='surname'
                                 />
                                 {errors.surname && <p className="alert alert-danger">{errors.surname}</p>}
-
-                                <Button variant='primary' type='submit' disabled={isSubmitting}>Sing up</Button>
-                                <Link to="/login">I'm already singed up, go to login</Link>
+                                <div className='buttonsContainer'>
+                                    <Button className='btn outlineButton' type='submit' disabled={isSubmitting}>Sing up</Button>
+                                    <Link className='linkButton' to="/login">I'm already singed up, go to login</Link>
+                                </div>
                             </form>
                         )}
                     </Formik>

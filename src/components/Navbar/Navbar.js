@@ -58,8 +58,8 @@ export function Navbar({userViewExpanded, setUserViewExpanded}) {
                   <Button className='oulineButton' onClick={logout}>Logout</Button>
                 </div>
               : <div className={`userOptions ${display()}`}>
-                  <Button className='oulineButton'><Link className='userIcon' to="/login">Login</Link></Button>
-                  <Button className='oulineButton'><Link className='userIcon' to="/register">Sing up</Link></Button>
+                  <Link className='userIcon oulineButton btn' to="/login">Login</Link>
+                  <Link className='userIcon oulineButton btn' to="/register">Sing up</Link>
                 </div>
           }
         </div>
