@@ -1,6 +1,8 @@
 import { signOut, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth, provider } from "../firebase/config";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export const LoginContext = createContext()
 
@@ -36,7 +38,11 @@ export const LoginProvider = ({children}) => {
             })
             .catch((err) => {
                 if(err.message === "Firebase: Error (auth/email-already-in-use)."){
-                    alert("This E-mail is already registered")
+                    const MySwal = withReactContent(Swal)
+                    MySwal.fire({
+                        icon: 'error',
+                        title: <p>This E-mail is already registered</p>,
+                    })
                 }
                 console.log(err.message)
             })

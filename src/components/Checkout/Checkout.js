@@ -89,16 +89,18 @@ export function Checkout () {
                     cart.forEach((product) => {
                         if(product.id === doc.id){
                             let item = product
-                            if(doc.data().availability.stock[obtainSize(item.size)] >= item.quantity){
-                                const dataSize = doc.data().availability.size
-                                let newStock = doc.data().availability.stock
-                                newStock[obtainSize(item.size)] = doc.data().availability.stock[obtainSize(item.size)] - item.quantity
-                                batch.update(doc.ref,{
-                                    availability: {stock: newStock, size: dataSize}
-                                })
-                            }else{
-                                editQuantity(item,doc.data().availability.stock[obtainSize(item.size)])
-                                outOfStock.push(item)
+                            if(item.quantity){
+                                if(doc.data().availability.stock[obtainSize(item.size)] >= item.quantity){
+                                    const dataSize = doc.data().availability.size
+                                    let newStock = doc.data().availability.stock
+                                    newStock[obtainSize(item.size)] = doc.data().availability.stock[obtainSize(item.size)] - item.quantity
+                                    batch.update(doc.ref,{
+                                        availability: {stock: newStock, size: dataSize}
+                                    })
+                                }else{
+                                    editQuantity(item,doc.data().availability.stock[obtainSize(item.size)])
+                                    outOfStock.push(item)
+                                }
                             }
                         }
                     })
@@ -115,7 +117,6 @@ export function Checkout () {
                         .finally(() => {
                             setLoading(false)
                         })
-                        //({name: item.name, color: item.color, size: item.size, quantity: item.quantity})
                 }else{
                     const MySwal = withReactContent(Swal)
                     MySwal.fire({
