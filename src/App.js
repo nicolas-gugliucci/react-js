@@ -11,16 +11,11 @@ import { LoginScreen } from './components/LoginScreen/LoginScreen';
 import { RegisterScreen } from './components/RegisterScreen/RegisterScreen';
 import { Checkout } from './components/Checkout/Checkout';
 import { useState } from 'react';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+
 
 function App() {
   const [ userViewExpanded, setUserViewExpanded ] = useState(false)
-  const MySwal = withReactContent(Swal)
-  MySwal.fire({
-      icon: 'error',
-      title: <p>This E-mail is already registered</p>,
-  })
+
   return (
     
     <div>
