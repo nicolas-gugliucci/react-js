@@ -16,8 +16,8 @@
                 height: 30px;
                 margin: 0;
                 padding: 2px;
-                border: 1px solid #007bff;
-                color: #007bff;
+                border: 1px solid rgb(159, 118, 41);
+                color: rgb(159, 118, 41);
                 display: flex;
                 align-items: center;
                 border-radius: 4px;
@@ -39,9 +39,22 @@
                     height: 100%;
                     width: 100%;
                     padding: 3px;
-                    color: #007bff;
+                    color: rgb(159, 118, 41);
                     &:hover{
                         color: white;
+                    }
+                }
+                background-color: transparent !important;
+                border-color: rgb(159, 118, 41) !important;
+                color: rgb(159, 118, 41) !important;
+                a{
+                    color: rgb(159, 118, 41) !important;
+                }
+                &:hover{
+                    background-color: rgb(159, 118, 41) !important;
+                    color: black !important;
+                    a{
+                        color: black !important;
                     }
                 }
             }

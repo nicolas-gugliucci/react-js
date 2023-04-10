@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Loading } from "../Loading/Loading";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 export function ItemDetailContainer() {
@@ -14,6 +16,7 @@ export function ItemDetailContainer() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const MySwal = withReactContent(Swal)
     setLoading(true)
     const docRef = doc(db, "products", id)
     
@@ -30,8 +33,11 @@ export function ItemDetailContainer() {
           
       })
       .catch((error) => {
-        console.log(error)
-        alert('Oops something went wrong :( \nPlease try again later')
+        console.log(error.message)
+        MySwal.fire({
+            icon: 'error',
+            html: "Oops something went wrong :( <br/>Please try again later",
+        })
       })
       .finally(()=>{
         setLoading(false)
@@ -39,6 +45,7 @@ export function ItemDetailContainer() {
   },[id, navigate])
 
   useEffect(() => {
+    const MySwal = withReactContent(Swal)
     if(item){
       setLoading(true)
       const productsRef = collection(db, "products")
@@ -53,8 +60,11 @@ export function ItemDetailContainer() {
           setColorVariety(docsFiltered)
         })
         .catch((error) => {
-          console.log(error)
-          alert('Oops something went wrong :( \nPlease try again later')
+          console.log(error.message)
+          MySwal.fire({
+            icon: 'error',
+            html: "Oops something went wrong :( <br/>Please try again later",
+          })
         })
         .finally(()=>{
           setLoading(false)

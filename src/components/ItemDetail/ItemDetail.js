@@ -87,7 +87,7 @@ export function ItemDetail({item, itemsColorVariety}) {
                       {quantityInCart(item.id, obtainSize())?
                         <div className="detailEdit">
                           <p>{quantityInCart(item.id, obtainSize())} on cart</p>
-                          <Button variant="outline-primary" className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></Button>
+                          <Button className="detailEditbutton" onClick={editItem}><CiEdit className="editIcon"/></Button>
                         </div>
                         :
                         <div className="detailBuy">

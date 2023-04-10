@@ -55,6 +55,7 @@ export function Navbar({userViewExpanded, setUserViewExpanded}) {
           {userViewExpanded
             && user.email
               ? <div className={`userOptions ${display()}`}>
+                  <Link className='btn oulineButton' to="/orders">Orders</Link>
                   <Button className='oulineButton' onClick={logout}>Logout</Button>
                 </div>
               : <div className={`userOptions ${display()}`}>

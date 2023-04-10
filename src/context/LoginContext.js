@@ -15,13 +15,41 @@ export const LoginProvider = ({children}) => {
         img: null
     })
 
+    const MySwal = withReactContent(Swal)
+
     const googleLogin = () => {
         signInWithPopup(auth, provider)
+            .catch((err) => {
+                MySwal.fire({
+                    icon: 'error',
+                    html: "Oops something went wrong :( <br/>Please try again later",
+                })
+                console.log(err.message)
+            })
     }
 
     const login = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                if(err.message === "Firebase: Error (auth/user-not-found)."){
+                    MySwal.fire({
+                        icon: 'error',
+                        title: <p>There is no user registered with this E-mail</p>,
+                    })
+                }else if(err.message === "Firebase: Error (auth/wrong-password)."){
+                    MySwal.fire({
+                        icon: 'error',
+                        title: <p>Wrong password</p>,
+                        html: "Please try again"
+                    })
+                }else{
+                    MySwal.fire({
+                        icon: 'error',
+                        html: "Oops something went wrong :( <br/>Please try again later",
+                    })
+                }
+                console.log(err.message)
+            })
     }
 
     const register = (values) => {
@@ -43,6 +71,11 @@ export const LoginProvider = ({children}) => {
                         icon: 'error',
                         title: <p>This E-mail is already registered</p>,
                     })
+                }else{
+                    MySwal.fire({
+                        icon: 'error',
+                        html: "Oops something went wrong :( <br/>Please try again later",
+                    })
                 }
                 console.log(err.message)
             })
@@ -58,6 +91,13 @@ export const LoginProvider = ({children}) => {
                     userid: null,
                     img: null
                 })
+            })
+            .catch((err) => {
+                MySwal.fire({
+                    icon: 'error',
+                    html: "Oops something went wrong :( <br/>Please try again later",
+                })
+                console.log(err.message)
             })
     }
 
@@ -75,6 +115,7 @@ export const LoginProvider = ({children}) => {
                 logout()
             }
         })
+        // eslint-disable-next-line
     }, [])
     
 

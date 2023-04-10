@@ -52,6 +52,8 @@ export function Checkout () {
 
     
     const ordermaker = (values) => {
+        const MySwal = withReactContent(Swal)
+
         setLoading(true)
         setOrder({
             user: values,
@@ -114,11 +116,17 @@ export function Checkout () {
                                     clean()
                                 })
                         })
+                        .catch((err) => {
+                            MySwal.fire({
+                                icon: 'error',
+                                html: "Oops something went wrong :( <br/>Please try again later",
+                            })
+                            console.log(err.message)
+                        })
                         .finally(() => {
                             setLoading(false)
                         })
                 }else{
-                    const MySwal = withReactContent(Swal)
                     MySwal.fire({
                         icon: 'warning',
                         title: <p>Someone beat you to it!</p>,
@@ -143,7 +151,6 @@ export function Checkout () {
                                 'Your new order has been sent.',
                                 'success'
                                 )
-                                setLoading(false)
                                 ordermaker(values)
                             } else if (result.dismiss === Swal.DismissReason.cancel) {
                                 MySwal.fire(
@@ -156,7 +163,21 @@ export function Checkout () {
                                     })
                             }
                         })
+                        .catch((err) => {
+                            MySwal.fire({
+                                icon: 'error',
+                                html: "Oops something went wrong :( <br/>Please try again later",
+                            })
+                            console.log(err.message)
+                        })
                 }
+            })
+            .catch((err) => {
+                MySwal.fire({
+                    icon: 'error',
+                    html: "Oops something went wrong :( <br/>Please try again later",
+                })
+                console.log(err.message)
             })
     }
 

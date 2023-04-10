@@ -9,6 +9,8 @@ import './ItemListContainer.scss'
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from "../../firebase/config"
 import { Form } from 'react-bootstrap';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 export function ItemListContainer() {
@@ -52,8 +54,12 @@ export function ItemListContainer() {
         setDisplayProducts(true)
       })
       .catch((error) => {
-        console.log(error)
-        alert('Oops something went wrong :( \nPlease try again in a while')
+        console.log(error.message)
+        const MySwal = withReactContent(Swal)
+          MySwal.fire({
+              icon: 'error',
+              html: "Oops something went wrong :( <br/>Please try again later",
+          })
       })
       .finally(() => {
         setLoading(false)

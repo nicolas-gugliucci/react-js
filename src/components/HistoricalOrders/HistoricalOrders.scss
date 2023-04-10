@@ -1,0 +1,37 @@
+.historicalOrders{
+    min-height: calc(100vh - 150px);
+    padding: 30px;
+    background: radial-gradient(circle, rgba(245,222,179,1) 0%, rgba(255,255,255,1) 100%);
+    .order{
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
+        h4{
+            font-size: 1.4rem !important;
+            .subtitle{
+                font-size: 1.7rem !important;
+                display: inline-block;
+            }
+            strong{
+                font-size: 1.7rem !important;
+            }
+        }
+        .info{
+            width: 30%;
+        }
+        .itemsSum{
+            display: flex;
+            flex-direction: column;
+            
+            width: 30%;
+            .itemLine{
+                margin-left: 30px;
+                font-size: 1.3rem !important;
+            }
+        }
+        .price{
+            width: 30%;
+            align-self: center;
+        }
+    }
+}
