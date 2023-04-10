@@ -12,7 +12,7 @@ Klash & Mor es un E-commerce de ropa masculina y femenina. El mismo, permite al 
 - `Funcionalidad 2-b`: Autorrellenado de ciertos datos en formularios
 - `Funcionalidad 2-c`: Visualización de historial de ordenes
 - `Funcionalidad 3`: Actualización de stock
-- `Funcionalidad 3-a`: Control de stock disponible antes de confirmar una orden.En caso de faltante, se le dará opción al cliente de realizar la compra con la máxima cantidad de productos disponibles al momento
+- `Funcionalidad 3-a`: Control de stock disponible antes de confirmar una orden. En caso de faltante, se le dará opción al cliente de realizar la compra con la máxima cantidad de productos disponibles al momento
 - `Funcionalidad 4`: Generación de orden
 
 
