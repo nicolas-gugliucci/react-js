@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './Checkout.scss'
 import { CartContext } from '../../context/CartContext'
 import { LoginContext } from '../../context/LoginContext'
@@ -40,6 +40,7 @@ export function Checkout () {
     const { user } = useContext(LoginContext)
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    const [commited, setCommited] = useState(false)
     const [orderId, setOrderId] = useState('')
     const [orden, setOrder] = useState(
         {
@@ -80,7 +81,6 @@ export function Checkout () {
         ];
 
         const batch = writeBatch(db)
-        const ordersRef = collection(db, 'orders')
         const productsRef = collection(db, 'products')
         const outOfStock = []
         let itemsRef = query(productsRef, where(documentId(), 'in', cart.map((item) => item.id)))
@@ -110,11 +110,7 @@ export function Checkout () {
                 if (outOfStock.length === 0){
                     batch.commit()
                         .then(() => {
-                            addDoc(ordersRef, orden)
-                                .then((doc)=>{
-                                    setOrderId(doc.id)
-                                    clean()
-                                })
+                            setCommited(true)
                         })
                         .catch((err) => {
                             MySwal.fire({
@@ -180,6 +176,17 @@ export function Checkout () {
                 console.log(err.message)
             })
     }
+
+    useEffect(() => {
+        const ordersRef = collection(db, 'orders')
+        commited
+            &&  addDoc(ordersRef, orden)
+                    .then((doc)=>{
+                        setOrderId(doc.id)
+                        clean()
+                    })
+    // eslint-disable-next-line
+    },[commited])
 
     if(orderId){
         return(
